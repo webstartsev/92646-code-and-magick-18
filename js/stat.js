@@ -31,7 +31,7 @@ var getMaxOfArray = function (numArray) {
 };
 
 var getRandomArbitrary = function (min, max) {
-  return Math.random() * (max - min) + min;
+  return Math.round(Math.random() * (max - min) + min);
 };
 
 var renderBackground = function (ctx, x, y, color) {
