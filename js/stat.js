@@ -20,20 +20,6 @@ var BAR_WIDTH = 40;
 var BAR_GAP = 50;
 var BAR_COLOR_ME = 'rgba(255, 0, 0, 1)';
 
-var getMaxOfArray = function (numArray) {
-  var max = 0;
-  for (var i = 0; i < numArray.length; i++) {
-    if (numArray[i] > max) {
-      max = numArray[i];
-    }
-  }
-  return max;
-};
-
-var getRandomArbitrary = function (min, max) {
-  return Math.random() * (max - min) + min;
-};
-
 var renderBackground = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
