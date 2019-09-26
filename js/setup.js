@@ -57,6 +57,10 @@ var wizardCoat = setup.querySelector('.setup-wizard .wizard-coat');
 var wizardEyes = setup.querySelector('.setup-wizard .wizard-eyes');
 var wizardFireball = setup.querySelector('.setup-fireball-wrap');
 
+var wizardHiddenInputCoat = setup.querySelector('input[name=coat-color]');
+var wizardHiddenInputEyes = setup.querySelector('input[name=eyes-color]');
+var wizardHiddenInputFireball = setup.querySelector('input[name=fireball-color]');
+
 var getRandomArbitrary = function (min, max) {
   return Math.round(Math.random() * (max - min) + min);
 };
@@ -153,17 +157,17 @@ setupUserName.addEventListener('keydown', function (evt) {
 wizardCoat.addEventListener('click', function () {
   var coatColor = getRandomFromArray(COAT_COLORS);
   wizardCoat.style.fill = coatColor;
-  setup.querySelector('input[name=coat-color]').value = coatColor;
+  wizardHiddenInputCoat.value = coatColor;
 });
 wizardEyes.addEventListener('click', function () {
   var eyesColor = getRandomFromArray(EYES_COLOR);
   wizardEyes.style.fill = eyesColor;
-  setup.querySelector('input[name=eyes-color]').value = eyesColor;
+  wizardHiddenInputEyes.value = eyesColor;
 });
 wizardFireball.addEventListener('click', function () {
   var fireballColor = getRandomFromArray(FIREBALL_COLORS);
   wizardFireball.style.background = fireballColor;
-  setup.querySelector('input[name=fireball-color]').value = fireballColor;
+  wizardHiddenInputFireball.value = fireballColor;
 });
 
 // Основнная программа
