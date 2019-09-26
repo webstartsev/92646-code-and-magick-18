@@ -38,6 +38,13 @@ var EYES_COLOR = [
   'yellow',
   'green'
 ];
+var FIREBALL_COLORS = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
 var COUNT_WIZARDS = 4;
 
 var setup = document.querySelector('.setup');
@@ -46,8 +53,15 @@ var setupClose = setup.querySelector('.setup-close');
 
 var setupUserName = setup.querySelector('.setup-user-name');
 
+var wizardCoat = setup.querySelector('.setup-wizard .wizard-coat');
+var wizardEyes = setup.querySelector('.setup-wizard .wizard-eyes');
+var wizardFireball = setup.querySelector('.setup-fireball-wrap');
+
 var getRandomArbitrary = function (min, max) {
   return Math.round(Math.random() * (max - min) + min);
+};
+var getRandomFromArray = function (array) {
+  return array[getRandomArbitrary(0, array.length - 1)];
 };
 
 var onPopupEscPress = function (evt) {
@@ -136,6 +150,22 @@ setupUserName.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     evt.stopPropagation();
   }
+});
+// События изменения цветов волшебника
+wizardCoat.addEventListener('click', function () {
+  var coatColor = getRandomFromArray(COAT_COLORS);
+  wizardCoat.style.fill = coatColor;
+  setup.querySelector('input[name=coat-color]').value = coatColor;
+});
+wizardEyes.addEventListener('click', function () {
+  var eyesColor = getRandomFromArray(EYES_COLOR);
+  wizardEyes.style.fill = eyesColor;
+  setup.querySelector('input[name=eyes-color]').value = eyesColor;
+});
+wizardFireball.addEventListener('click', function () {
+  var fireballColor = getRandomFromArray(FIREBALL_COLORS);
+  wizardFireball.style.background = fireballColor;
+  setup.querySelector('input[name=fireball-color]').value = fireballColor;
 });
 
 // Основнная программа
