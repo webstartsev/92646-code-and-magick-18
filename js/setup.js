@@ -1,5 +1,8 @@
 'use strict';
 
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
 var NAMES = [
   'Иван',
   'Хуан Себастьян',
@@ -37,13 +40,32 @@ var EYES_COLOR = [
 ];
 var COUNT_WIZARDS = 4;
 
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open-icon');
+var setupClose = setup.querySelector('.setup-close');
+
+var setupUserName = setup.querySelector('.setup-user-name');
+
 var getRandomArbitrary = function (min, max) {
   return Math.round(Math.random() * (max - min) + min);
 };
 
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    hideSetup();
+  }
+};
+
 // Показываем настройки
 var showSetup = function () {
-  document.querySelector('.setup').classList.remove('hidden');
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+// Закрываем настройки
+var hideSetup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
 };
 
 // Показываем список волшебников
@@ -91,7 +113,31 @@ var renderWizard = function () {
   wizardList.appendChild(fragment);
 };
 
+// События показа настроек
+setupOpen.addEventListener('click', function () {
+  showSetup();
+});
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    showSetup();
+  }
+});
+// События скрытия настроек
+setupClose.addEventListener('click', function () {
+  hideSetup();
+});
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    hideSetup();
+  }
+});
+
+setupUserName.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    evt.stopPropagation();
+  }
+});
+
 // Основнная программа
-showSetup();
 showSetupSimilar();
 renderWizard();
