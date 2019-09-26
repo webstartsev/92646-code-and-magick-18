@@ -91,13 +91,11 @@ var showSetupSimilar = function () {
 var createWizards = function (names, lastnames, coatColor, eyesColor) {
   var indexName = getRandomArbitrary(0, names.length - 1);
   var indexLastname = getRandomArbitrary(0, lastnames.length - 1);
-  var indexCoatColor = getRandomArbitrary(0, coatColor.length - 1);
-  var indexEyesColor = getRandomArbitrary(0, eyesColor.length - 1);
 
   var wizard = {
     name: names[indexName] + ' ' + lastnames[indexLastname],
-    coatColor: coatColor[indexCoatColor],
-    eyesColor: eyesColor[indexEyesColor]
+    coatColor: getRandomFromArray(coatColor),
+    eyesColor: getRandomFromArray(eyesColor)
   };
 
   return wizard;
