@@ -43,6 +43,8 @@
     '#e6e848'
   ];
   var COUNT_WIZARDS = 4;
+  var SETUP_COORD_X = '50';
+  var SETUP_COORD_Y = '80';
 
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open-icon');
@@ -62,9 +64,15 @@
     window.utils.onEscPress(evt, hideSetup);
   };
 
+  var setSetupDafaultPosition = function () {
+    setup.style.left = SETUP_COORD_X + '%';
+    setup.style.top = SETUP_COORD_Y + 'px';
+  };
+
   // Показываем настройки
   var showSetup = function () {
     setup.classList.remove('hidden');
+    setSetupDafaultPosition();
     document.addEventListener('keydown', onPopupEscPress);
   };
 
