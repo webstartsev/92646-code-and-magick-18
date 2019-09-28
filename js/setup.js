@@ -58,17 +58,8 @@
   var wizardHiddenInputEyes = setup.querySelector('input[name=eyes-color]');
   var wizardHiddenInputFireball = setup.querySelector('input[name=fireball-color]');
 
-  var getRandomArbitrary = function (min, max) {
-    return Math.round(Math.random() * (max - min) + min);
-  };
-  var getRandomFromArray = function (array) {
-    return array[getRandomArbitrary(0, array.length - 1)];
-  };
-
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === window.utils.ESC_KEYCODE) {
-      hideSetup();
-    }
+    window.utils.onEscPress(evt, hideSetup);
   };
 
   // Показываем настройки
@@ -90,13 +81,13 @@
 
   // Создаем объект волшебников
   var createWizards = function (names, lastnames, coatColor, eyesColor) {
-    var indexName = getRandomArbitrary(0, names.length - 1);
-    var indexLastname = getRandomArbitrary(0, lastnames.length - 1);
+    var indexName = window.utils.getRandomArbitrary(0, names.length - 1);
+    var indexLastname = window.utils.getRandomArbitrary(0, lastnames.length - 1);
 
     var wizard = {
       name: names[indexName] + ' ' + lastnames[indexLastname],
-      coatColor: getRandomFromArray(coatColor),
-      eyesColor: getRandomFromArray(eyesColor)
+      coatColor: window.utils.getRandomFromArray(coatColor),
+      eyesColor: window.utils.getRandomFromArray(eyesColor)
     };
 
     return wizard;
@@ -152,17 +143,17 @@
   });
   // События изменения цветов волшебника
   wizardCoat.addEventListener('click', function () {
-    var coatColor = getRandomFromArray(COAT_COLORS);
+    var coatColor = window.utils.getRandomFromArray(COAT_COLORS);
     wizardCoat.style.fill = coatColor;
     wizardHiddenInputCoat.value = coatColor;
   });
   wizardEyes.addEventListener('click', function () {
-    var eyesColor = getRandomFromArray(EYES_COLOR);
+    var eyesColor = window.utils.getRandomFromArray(EYES_COLOR);
     wizardEyes.style.fill = eyesColor;
     wizardHiddenInputEyes.value = eyesColor;
   });
   wizardFireball.addEventListener('click', function () {
-    var fireballColor = getRandomFromArray(FIREBALL_COLORS);
+    var fireballColor = window.utils.getRandomFromArray(FIREBALL_COLORS);
     wizardFireball.style.background = fireballColor;
     wizardHiddenInputFireball.value = fireballColor;
   });
