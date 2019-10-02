@@ -1,25 +1,5 @@
 'use strict';
 (function () {
-  var NAMES = [
-    'Иван',
-    'Хуан Себастьян',
-    'Мария',
-    'Кристоф',
-    'Виктор',
-    'Юлия',
-    'Люпита',
-    'Вашингтон'
-  ];
-  var LASTNAMES = [
-    'да Марья',
-    'Верон',
-    'Мирабелла',
-    'Вальц',
-    'Онопко',
-    'Топольницкая',
-    'Нионго',
-    'Ирвинг'
-  ];
   var COAT_COLORS = [
     'rgb(101, 137, 164)',
     'rgb(241, 43, 107)',
@@ -45,6 +25,8 @@
   var COUNT_WIZARDS = 4;
   var SETUP_COORD_X = '50';
   var SETUP_COORD_Y = '80';
+
+  var URL = 'https://js.dump.academy/code-and-magick/data';
 
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open-icon');
@@ -87,39 +69,24 @@
     document.querySelector('.setup-similar').classList.remove('hidden');
   };
 
-  // Создаем объект волшебников
-  var createWizards = function (names, lastnames, coatColor, eyesColor) {
-    var indexName = window.utils.getRandomArbitrary(0, names.length - 1);
-    var indexLastname = window.utils.getRandomArbitrary(0, lastnames.length - 1);
-
-    var wizard = {
-      name: names[indexName] + ' ' + lastnames[indexLastname],
-      coatColor: window.utils.getRandomFromArray(coatColor),
-      eyesColor: window.utils.getRandomFromArray(eyesColor)
-    };
-
-    return wizard;
-  };
-
   // Заполняем шаблон данными волшебника
   var wizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('div');
   var fillWizardTemplate = function (wizard) {
     var template = wizardTemplate.cloneNode(true);
 
     template.querySelector('.setup-similar-label').textContent = wizard.name;
-    template.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-    template.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+    template.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    template.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
 
     return template;
   };
 
   // Отрисовка волшебников
-  var renderWizard = function () {
+  var renderWizards = function (wizards) {
     var wizardList = document.querySelector('.setup-similar-list');
     var fragment = document.createDocumentFragment();
     for (var i = 1; i <= COUNT_WIZARDS; i++) {
-      var wizard = createWizards(NAMES, LASTNAMES, COAT_COLORS, EYES_COLOR);
-      var template = fillWizardTemplate(wizard);
+      var template = fillWizardTemplate(wizards[window.utils.getRandomArbitrary(0, wizards.length - 1)]);
       fragment.appendChild(template);
     }
     wizardList.appendChild(fragment);
@@ -166,7 +133,17 @@
     wizardHiddenInputFireball.value = fireballColor;
   });
 
-  // Основнная программа
-  showSetupSimilar();
-  renderWizard();
+  var succesHandler = function (wizards) {
+    renderWizards(wizards);
+    showSetupSimilar();
+  };
+
+  var errorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.classList.add('status-error');
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  window.backend.load(URL, succesHandler, errorHandler);
 })();
