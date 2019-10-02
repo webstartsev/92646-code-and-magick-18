@@ -27,6 +27,7 @@
   var SETUP_COORD_Y = '80';
 
   var URL = 'https://js.dump.academy/code-and-magick/data';
+  var URL_SAVE = 'https://js.dump.academy/code-and-magick';
 
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open-icon');
@@ -146,4 +147,12 @@
   };
 
   window.backend.load(URL, succesHandler, errorHandler);
+
+  // Отправляем данные
+  var setupForm = document.querySelector('.setup-wizard-form');
+  setupForm.addEventListener('submit', function (evt) {
+    window.backend.save(URL_SAVE, new FormData(setupForm), hideSetup, errorHandler);
+
+    evt.preventDefault();
+  });
 })();
