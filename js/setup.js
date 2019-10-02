@@ -26,7 +26,7 @@
   var SETUP_COORD_X = '50';
   var SETUP_COORD_Y = '80';
 
-  var URL = 'https://js.dump.academy/code-and-magick/data';
+  var URL_DATA = 'https://js.dump.academy/code-and-magick/data';
   var URL_SAVE = 'https://js.dump.academy/code-and-magick';
 
   var setup = document.querySelector('.setup');
@@ -146,7 +146,8 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  window.backend.load(URL, succesHandler, errorHandler);
+  // Получаем данные
+  window.backend.load(URL_DATA, succesHandler, errorHandler);
 
   // Отправляем данные
   var setupForm = document.querySelector('.setup-wizard-form');
