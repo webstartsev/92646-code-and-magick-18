@@ -32,11 +32,6 @@
     document.removeEventListener('keydown', onPopupEscPress);
   };
 
-  // Показываем список волшебников
-  var showSetupSimilar = function () {
-    document.querySelector('.setup-similar').classList.remove('hidden');
-  };
-
   // События показа настроек
   setupOpen.addEventListener('click', function () {
     showSetup();
@@ -62,11 +57,9 @@
     }
   });
 
-  var succesHandler = function (data) {
-    window.render.wizards(data);
-    showSetupSimilar();
+  var successHandler = function () {
+    hideSetup();
   };
-
   var errorHandler = function (errorMessage) {
     var node = document.createElement('div');
     node.classList.add('status-error');
@@ -74,13 +67,10 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  // Получаем данные
-  window.backend.load(window.config.URL_DATA, succesHandler, errorHandler);
-
   // Отправляем данные
   var setupForm = document.querySelector('.setup-wizard-form');
   setupForm.addEventListener('submit', function (evt) {
-    window.backend.save(window.config.URL_SAVE, new FormData(setupForm), hideSetup, errorHandler);
+    window.backend.save(window.config.URL_SAVE, new FormData(setupForm), successHandler, errorHandler);
 
     evt.preventDefault();
   });

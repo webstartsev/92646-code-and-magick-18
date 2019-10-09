@@ -36,18 +36,29 @@
 
   // События изменения цветов волшебника
   wizardCoat.addEventListener('click', function () {
-    var coatColor = window.utils.getRandomFromArray(COAT_COLORS);
-    wizardCoat.style.fill = coatColor;
-    wizardHiddenInputCoat.value = coatColor;
+    var color = window.utils.getRandomFromArray(COAT_COLORS);
+    wizardCoat.style.fill = color;
+    wizardHiddenInputCoat.value = color;
+    window.wizard.onCoatChange(color);
   });
   wizardEyes.addEventListener('click', function () {
-    var eyesColor = window.utils.getRandomFromArray(EYES_COLOR);
-    wizardEyes.style.fill = eyesColor;
-    wizardHiddenInputEyes.value = eyesColor;
+    var color = window.utils.getRandomFromArray(EYES_COLOR);
+    wizardEyes.style.fill = color;
+    wizardHiddenInputEyes.value = color;
+    window.wizard.onEyesChange(color);
   });
   wizardFireball.addEventListener('click', function () {
-    var fireballColor = window.utils.getRandomFromArray(FIREBALL_COLORS);
-    wizardFireball.style.background = fireballColor;
-    wizardHiddenInputFireball.value = fireballColor;
+    var color = window.utils.getRandomFromArray(FIREBALL_COLORS);
+    wizardFireball.style.background = color;
+    wizardHiddenInputFireball.value = color;
   });
+
+  window.wizard = {
+    onCoatChange: function (color) {
+      return color;
+    },
+    onEyesChange: function (color) {
+      return color;
+    }
+  };
 })();
