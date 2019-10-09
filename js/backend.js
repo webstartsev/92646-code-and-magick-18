@@ -1,9 +1,13 @@
 'use strict';
 
 (function () {
+  var STATUS_OK = 200;
+  var TIMEOUT = 10000; // 10s
+  var RESPONSE_TYPE = 'json';
+
   var onLoadHandler = function (xhr, onLoad, onError) {
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === STATUS_OK) {
         onLoad(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -27,8 +31,8 @@
     },
     load: function (url, onLoad, onError) {
       var xhr = new XMLHttpRequest();
-      xhr.responseType = 'json';
-      xhr.timeout = 10000; // 10s
+      xhr.responseType = RESPONSE_TYPE;
+      xhr.timeout = TIMEOUT; // 10s
 
       onLoadHandler(xhr, onLoad, onError);
       onErrorHandler(xhr, onError);
@@ -38,8 +42,8 @@
     },
     save: function (url, data, onLoad, onError) {
       var xhr = new XMLHttpRequest();
-      xhr.responseType = 'json';
-      xhr.timeout = 10000; // 10s
+      xhr.responseType = RESPONSE_TYPE;
+      xhr.timeout = TIMEOUT; // 10s
 
       onLoadHandler(xhr, onLoad, onError);
       onErrorHandler(xhr, onError);
