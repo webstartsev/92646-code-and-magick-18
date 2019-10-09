@@ -20,7 +20,7 @@
       var similarList = document.querySelector('.setup-similar-list');
       similarList.innerHTML = '';
       var fragment = document.createDocumentFragment();
-      for (var i = 1; i <= COUNT_WIZARDS; i++) {
+      for (var i = 0; i < COUNT_WIZARDS; i++) {
         var template = fillWizardTemplate(data[i]);
         fragment.appendChild(template);
       }
