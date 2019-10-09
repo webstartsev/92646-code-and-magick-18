@@ -37,15 +37,15 @@
     }));
   };
 
-  window.wizard.onCoatChange = function (color) {
+  window.wizard.onCoatChange = window.utils.debounce(function (color) {
     coatColor = color;
     updateSimilar();
-  };
+  });
 
-  window.wizard.onEyesChange = function (color) {
+  window.wizard.onEyesChange = window.utils.debounce(function (color) {
     eyesColor = color;
     updateSimilar();
-  };
+  });
 
   // Получаем данные
   window.backend.load(window.config.URL_DATA, succesHandler, errorHandler);
