@@ -7,6 +7,8 @@
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open-icon');
   var setupClose = setup.querySelector('.setup-close');
+  var upload = setup.querySelector('.upload');
+  var userPic = setup.querySelector('.setup-user-pic');
 
   var setupUserName = setup.querySelector('.setup-user-name');
 
@@ -73,5 +75,22 @@
     window.backend.save(window.config.URL_SAVE, new FormData(setupForm), successHandler, errorHandler);
 
     evt.preventDefault();
+  });
+
+  // Загрука файла
+  upload.addEventListener('change', function (evt) {
+    var file = evt.target.files[0];
+    if (file) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(file);
+
+      reader.onload = function () {
+        userPic.src = reader.result;
+      };
+      reader.onerror = function () {
+        errorHandler('Произошла ошибка, попробуйте снова');
+      };
+    }
   });
 })();
